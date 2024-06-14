@@ -13,24 +13,24 @@
 
 1. Basic python concepy (level 1)
 
-   code directory:- td1-python-basic
+   code directory:- pt1-python-basic
 
    i.e variables, operators, control statements, datatypes.
 
 2. Oops concept in python (level 2)
   
-   code directory:- pt-oops-python
+   code directory:- pt2-python-oops
 
    i.e functions, modules, packages, all oops based topics.
 
 3. Advance python concept (level 3)
 
-   code directory:- pt-advance-python 
+   code directory:- pt3-python-advance 
 
    i.e Iterators, Generators, Decorators, Closure, Regular Expressions, Exception Handling,   File Handling, Database Handling.
 
 4. Python Frameworks (level 4)
 
-   code directory:- pt-django-project
+   code directory:- pt4-python-frameworks-project
 
    i.e Django and Flask frameworks basics with some projects.
