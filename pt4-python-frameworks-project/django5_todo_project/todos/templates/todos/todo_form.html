@@ -1,0 +1,29 @@
+{% load static %}
+<html>
+<head>
+    <title>{% if form.instance.pk %}Edit Todo{% else %}Add Todo{% endif %}</title>
+    <link rel="stylesheet" href="{% static 'css/todo_form.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2 style="text-align: center;">{% if form.instance.pk %}Edit Todo{% else %}Add Todo{% endif %}</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_title">Title:</label>
+                {{ form.title }}
+            </div>
+            <div class="form-group">
+                <label for="id_description">Description:</label>
+                {{ form.description }}
+            </div>
+            <div class="form-group">
+                <label for="id_completed">Completed:</label>
+                {{ form.completed }}
+            </div>
+            <button type="submit" class="btn-save">Save</button>
+            <a href="{% url 'todos:todo_list' %}" class="btn-cancel">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

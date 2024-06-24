@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Todo</title>
+    <link rel="stylesheet" href="{% static 'css/todo_confirm_delete.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Are you sure you want to delete "{{ todo.title }}"?</h2>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-delete">Yes, delete</button>
+            <a href="{% url 'todos:todo_list' %}" class="btn btn-cancel">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

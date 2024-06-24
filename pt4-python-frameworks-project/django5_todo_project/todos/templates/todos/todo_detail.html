@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo Detail</title>
+    <link rel="stylesheet" href="{% static 'css/todo_detail.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="top-buttons">
+            <a href="{% url 'todos:todo_list' %}" class="btn btn-back">Back to Todo List</a>
+        </div>
+        <h2>Todo Detail</h2>
+        <div class="todo-detail">
+            <h3>Title: {{ todo.title }}</h3>
+            <p>Description: {{ todo.description }}</p>
+            <p>Completed: <span class="{% if todo.completed %}completed{% else %}not-completed{% endif %}">{% if todo.completed %}Yes{% else %}No{% endif %}</span></p>
+        </div>
+        <div class="bottom-buttons">
+            <a href="{% url 'todos:update_todo' todo.pk %}" class="btn btn-edit">Edit</a>
+            <a href="{% url 'todos:delete_todo' todo.pk %}" class="btn btn-delete">Delete</a>
+        </div>
+    </div>
+</body>
+</html>

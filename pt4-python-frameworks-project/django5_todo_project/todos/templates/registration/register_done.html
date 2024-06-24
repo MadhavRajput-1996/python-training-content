@@ -1,0 +1,14 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Complete</title>
+    <link rel="stylesheet" href="{% static 'css/register_done.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Registration Complete</h2>
+        <p>Thank you for registering, {{ new_user.username }}!</p>
+    </div>
+</body>
+</html>

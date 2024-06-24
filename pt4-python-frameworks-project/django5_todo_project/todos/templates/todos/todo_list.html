@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo List</title>
+    <link rel="stylesheet" href="{% static 'css/todo_list.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Todo List</h2>
+        <ul class="todo-list">
+            {% for todo in todos %}
+                <li class="todo-item">
+                    <span class="todo-title"><a href="{% url 'todos:todo_detail' todo.pk %}">{{ todo.title }}</a></span>
+                    {% if todo.user == request.user %}
+                        <span class="todo-actions">
+                            <a href="{% url 'todos:update_todo' todo.pk %}" class="btn btn-edit">Edit</a>
+                            <a href="{% url 'todos:delete_todo' todo.pk %}" class="btn btn-delete">Delete</a>
+                        </span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="action-buttons">
+            <a href="{% url 'todos:create_todo' %}" class="btn btn-add">Add Todo</a>
+            <a href="{% url 'todos:logout' %}" class="btn btn-logout">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
