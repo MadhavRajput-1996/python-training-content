@@ -34,3 +34,23 @@
    code directory:- pt4-python-frameworks-project
 
    i.e Django and Flask frameworks basics with some projects.
+
+   ### commands to run
+
+1. Migration commands:
+   
+   cd path/to/your/project
+   python manage.py makemigrations
+   python manage.py migrate
+   
+2. Faker data feed command: 
+
+   cd path/to/your/project
+   python manage.py populate_todos
+
+   
+   
+
+
+
+   
