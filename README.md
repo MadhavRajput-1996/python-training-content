@@ -35,7 +35,7 @@
 
    i.e Django and Flask frameworks basics with some projects.
 
-   ### commands to run
+### commands to run
 
 1. Migration commands:
    
