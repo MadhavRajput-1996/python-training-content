@@ -5,24 +5,28 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, TodoForm
 from .models import Todo
+from django.db import IntegrityError  
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
+
 def register(request):
-    try:
-        if request.method == 'POST':
-            form = CustomUserCreationForm(request.POST)
-            if form.is_valid():
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            try:
                 form.save()
-                username = form.cleaned_data.get('username')
-                messages.success(request, f'Account created for {username}. Please log in.')
+                email = form.cleaned_data.get('email')
+                messages.success(request, f'Account created for {email}. Please log in.')
                 return redirect('todos:login')
+            except IntegrityError as e:
+                messages.error(request, 'There was an error saving your account. Please try again.')
+                logger.error(f"Error in user registration: {e}")
         else:
-            form = CustomUserCreationForm()
-    except Exception as e:
-        logger.error(f"Error in user registration: {e}")
-        messages.error(request, 'Error creating account. Please try again later.')
+            messages.error(request, 'Invalid form data. Please check the form and try again.')
+    else:
+        form = CustomUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
 
 def user_login(request):

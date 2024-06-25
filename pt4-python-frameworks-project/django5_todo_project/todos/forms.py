@@ -15,6 +15,12 @@ class CustomUserCreationForm(UserCreationForm):
         model = User
         fields = ('first_name', 'last_name', 'email', 'password1', 'password2')
 
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError('This email is already registered. Please use a different email address.')
+        return email
+
     def clean_password2(self):
         cd = self.cleaned_data
         if cd['password1'] != cd['password2']:
@@ -23,10 +29,21 @@ class CustomUserCreationForm(UserCreationForm):
 
     def save(self, commit=True):
         user = super().save(commit=False)
+        user.email = self.cleaned_data['email']
+        user.username = self.generate_unique_username(user.email)
         user.set_password(self.cleaned_data['password1'])
         if commit:
             user.save()
         return user
+
+    def generate_unique_username(self, email):
+        base_username = email.split('@')[0]
+        username = base_username
+        counter = 1
+        while User.objects.filter(username=username).exists():
+            username = f'{base_username}{counter}'
+            counter += 1
+        return username
 
 
 class CustomAuthenticationForm(AuthenticationForm):
