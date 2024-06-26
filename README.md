@@ -35,7 +35,7 @@
 
    i.e Django and Flask frameworks basics with some projects.
 
-### commands to run
+### Commands to run 
 
 1. Migration commands:
    
@@ -47,6 +47,34 @@
 
    cd path/to/your/project
    python manage.py populate_todos
+
+### Steps to upload and run project on pythonanywhere
+
+1. Create an account
+2. Go to web tab and click on add a new web app
+3. select django, select python version and give project a name.
+4. Go to console tab and click on bash
+5. git clone your project there
+6. Do couple of more stuff inside web tab
+   
+   - scroll down and go to WSGI configuration file: "set your project home by copying the path using bash"
+      - i.e /home/madhav1996/python-training-content/pt4-python-frameworks-project/django5_todo_project
+   - also set environment variable to tell django where your settings.py is
+      - i.e os.environ['DJANGO_SETTINGS_MODULE'] = 'django5_todo_project.settings'
+   - Set Static files:
+      - "give the static file path of your project"
+     
+8. Open your settings.py using nano in bash and do the following
+
+   - import os
+   - enter ALLOWED_HOSTS = ['madhav1996.pythonanywhere.com']
+   - STATIC_URL = '/static/' and STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+   - Finally Run "python manage.py collectstatic" command
+      
+9. Go to your pythonanywhere web tab and reload the site
+     - i.e https://www.pythonanywhere.com/user/madhav1996/webapps 
+     
+
 
    
    
