@@ -72,7 +72,9 @@
    - Finally Run "python manage.py collectstatic" command
       
 9. Go to your pythonanywhere web tab and reload the site
-     - i.e https://www.pythonanywhere.com/user/madhav1996/webapps 
+     - i.e https://www.pythonanywhere.com/user/madhav1996/webapps
+  
+10. site live url http://madhav1996.pythonanywhere.com/       
      
 
 
