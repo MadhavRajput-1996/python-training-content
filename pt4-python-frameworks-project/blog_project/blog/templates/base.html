@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Blog App{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    <div class="wrapper">
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{% url 'post_list' %}">My Blog</a>
+                </div>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'post_list' %}">Home</a></li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'post_create' %}">Create Post</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Profile</a></li>
+                    <li class="nav-item">
+                        <form method="post" action="{% url 'logout' %}" class="nav-link-form">{% csrf_token %}<button
+                                type="submit" class="nav-link-btn">Logout</button></form>
+                    </li>
+                    {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+        <main class="container">
+            {% block content %}
+            {% endblock %}
+        </main>
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2024 Madhav Blog App. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

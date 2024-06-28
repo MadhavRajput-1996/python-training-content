@@ -1,0 +1,64 @@
+.register-container {
+    background-color: #ffffff;
+    padding: 20px; /* Reduced padding */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px; /* Reduced max-width */
+    margin: 50px auto;
+}
+
+/* Heading styling */
+.register-container h2 {
+    font-size: 1.5rem; /* Reduced font size */
+    color: #517190;
+    margin-bottom: 15px; /* Reduced margin */
+    text-align: center;
+}
+
+/* Form field styling */
+.register-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-container label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #517190;
+}
+
+.register-container input,
+.register-container select,
+.register-container textarea {
+    padding: 8px; /* Reduced padding */
+    margin-bottom: 10px; /* Reduced margin */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9rem; /* Reduced font size */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.register-container input:focus,
+.register-container select:focus,
+.register-container textarea:focus {
+    border-color: #517190;
+    outline: none;
+}
+
+/* Button styling */
+.btn {
+    background-color: #517190;
+    color: #fff;
+    padding: 8px 15px; /* Reduced padding */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem; /* Reduced font size */
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #c3b932;
+}

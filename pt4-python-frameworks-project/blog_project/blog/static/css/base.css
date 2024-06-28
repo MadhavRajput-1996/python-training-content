@@ -1,0 +1,86 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9; /* Light gray background for a professional look */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.navbar {
+  background-color: #343a40; /* Dark gray background for the navbar */
+  color: #fff;
+  padding: 10px 0;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar .navbar-header {
+  margin-left: 10px;
+}
+
+.navbar .navbar-brand {
+  color: #ffc107; /* Yellow color for the brand */
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.nav-item {
+  margin-left: 10px;
+}
+
+.nav-link,
+.nav-link-btn {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  transition: all 0.3s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.nav-link:hover,
+.nav-link-btn:hover {
+  background-color: #ffc107; /* Yellow hover effect */
+  color: #343a40; /* Dark gray text on hover */
+}
+
+.nav-link-form {
+  display: inline; /* Ensuring the form is inline with other nav items */
+}
+
+.container {
+  width: 80%;
+  margin: 20px auto;
+  flex: 1; /* Make main container flex item to grow */
+}
+
+.footer {
+  background-color: #343a40; /* Dark gray footer background */
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+  margin-top: auto;
+}

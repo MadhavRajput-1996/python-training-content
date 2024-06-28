@@ -1,0 +1,78 @@
+/* Container for the post detail */
+.post-detail {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px; /* Add spacing below the header */
+}
+
+.post-title {
+    font-size: 2rem;
+    color: #343a40;
+}
+
+.post-meta {
+    background: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.post-image-container {
+    text-align: center;
+    margin-top: 20px; /* Add spacing between header and image */
+}
+
+.post-image {
+    max-width: 100%; /* Adjust the maximum width of the image */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* Add spacing below the image */
+}
+
+.post-content {
+    font-size: 1.1rem;
+    color: #343a40;
+    line-height: 1.6;
+    text-align: left;
+}
+
+/* Edit and Delete Links */
+.post-actions {
+    text-align: right;
+    margin-bottom: 10px; /* Add spacing below the links */
+}
+
+.post-actions a {
+    margin-left: 10px; /* Add spacing between links */
+    padding: 8px 16px; /* Add padding to make clickable area larger */
+    border-radius: 5px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.post-actions a.edit-link {
+    background-color: #007bff; /* Blue color for edit link */
+    color: #fff;
+}
+
+.post-actions a.delete-link {
+    background-color: #dc3545; /* Red color for delete link */
+    color: #fff;
+}
+
+.post-actions a:hover {
+    opacity: 0.8; /* Reduce opacity on hover */
+}

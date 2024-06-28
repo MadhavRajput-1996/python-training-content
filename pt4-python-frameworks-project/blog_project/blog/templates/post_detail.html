@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<article class="post-detail">
+    <div class="post-header">
+        <div class="post-title">{{ post.title }}</div>
+        <div class="post-meta">by {{ author_first_name }} on {{ post.pub_date|date:"F j, Y" }}</div>
+    </div>
+    {% if post.image %}
+        <div class="post-image-container">
+            <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
+        </div>
+    {% endif %}
+    <div class="post-content">
+        <p>{{ post.content }}</p>
+    </div>
+
+    {% if can_edit_delete %}
+        <!-- Edit and Delete Links for the owner of the post -->
+        <div class="post-actions">
+            <a href="{% url 'post_edit' post.pk %}" class="edit-link">Edit</a>
+            <a href="{% url 'post_delete' post.pk %}" class="delete-link">Delete</a>
+        </div>
+    {% endif %}
+</article>
+{% endblock %}

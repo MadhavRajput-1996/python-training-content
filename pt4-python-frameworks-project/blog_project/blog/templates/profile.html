@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Profile{% endblock %}
+
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-header">
+        <h2>Welcome, {{ first_name }}</h2>
+        <p class="profile-meta">Joined: {{ user.date_joined|date:"F j, Y" }}</p>
+    </div>
+    <div class="profile-posts">
+        <h3>Your Posts</h3>
+        <ul class="post-list">
+            {% for post in user_posts %}
+            <li class="post-item">
+                <div class="post-info">
+                    <h4 class="post-title">{{ post.title }}</h4>
+                    <p class="post-date">Published on {{ post.pub_date|date:"F j, Y" }}</p>
+                </div>
+            </li>
+            {% empty %}
+            <li>No posts found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

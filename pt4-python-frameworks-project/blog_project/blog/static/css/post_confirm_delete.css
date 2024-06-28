@@ -1,0 +1,25 @@
+form {
+    margin-top: 20px;
+}
+
+form button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #c82333;
+}
+
+form a {
+    color: #333;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+form a:hover {
+    text-decoration: underline;
+}

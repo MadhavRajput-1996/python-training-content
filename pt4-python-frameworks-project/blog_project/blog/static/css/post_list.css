@@ -1,0 +1,75 @@
+/* Container for the post list */
+.post-list-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+.post-list-container h2 {
+    font-size: 2rem;
+    color: #343a40;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.post-card {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+}
+
+.post-title a {
+    font-size: 1.5rem;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.post-title a:hover {
+    text-decoration: underline;
+}
+
+.post-meta {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-top: 5px;
+}
+
+.post-excerpt {
+    font-size: 1rem;
+    color: #343a40;
+    margin-top: 10px;
+}
+
+.read-more {
+    font-size: 1rem;
+    color: #007bff;
+    text-decoration: none;
+    margin-top: 15px;
+    display: inline-block;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+.no-posts {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #6c757d;
+}
