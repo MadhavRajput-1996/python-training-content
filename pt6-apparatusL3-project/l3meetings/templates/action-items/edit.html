@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+  {{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+{% endif %} {% block content %}
+<div class="col-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <div class="d-flex align-items-center justify-content-between">
+        <h4 class="card-title">Edit Action Item</h4>
+        <a href="javascript:history.back();" class="btn btn-primary history_btn">
+          <i class="fa fa-chevron-circle-left"></i>
+          Go Back
+        </a>
+      </div>
+      <hr>
+      <form method="post" class="meeting_form">
+        {% csrf_token %}
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="form-floating">
+                {{ form.meeting }}
+                <label class="required" class="required" for="id_items">Meeting</label>
+                {{ form.meeting.errors }}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="form-floating">
+                {{ form.assignedto}}
+                <label class="required" class="required" for="id_assignedto">Assigned To</label>
+                {{ form.assignedto.errors }}
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="form-floating">
+                {{ form.title}}
+                <label class="required" class="required" for="id_title">Title</label>
+                {{ form.title.errors }}
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="form-floating datepicker_wrapper">
+                {{ form.start_date }}
+                <label class="required" class="required" for="id_start_date">Start Date</label>
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                  </span>
+                </div>
+                {{ form.start_date.errors }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="form-floating datepicker_wrapper">
+                {{ form.target_end_date }}
+                <label class="required" class="required" for="id_target_end_date">Target End Date</label>
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                  </span>
+                </div>
+                {{ form.target_end_date.errors }}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="form-floating datepicker_wrapper">
+                {{ form.actual_end_date }}
+                <label class="" class="required" for="id_actual_end_date">Actual End Date</label>
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                  </span>
+                </div>
+                {{ form.actual_end_date.errors }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="form-floating">
+                {{ form.status }}
+                <label class="required" class="required" for="id_status">Status</label>
+                {{ form.status.errors }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-right">
+          <button type="submit" class="btn btn-primary mb-2">
+            Update Action Item
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

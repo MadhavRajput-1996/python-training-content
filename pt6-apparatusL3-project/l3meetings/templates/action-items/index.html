@@ -1,0 +1,82 @@
+{% extends 'base.html' %} {% block content %}
+{% if messages %}
+{% for message in messages %}
+{% load custom_filters %}
+
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+  {{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+{% endif %} {% load custom_filters %}
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex align-items-center justify-content-between">
+      <h4 class="card-title">Action Items</h4>
+      <a href="/meetings/action-items/create" class="btn btn-primary">Add Action Item</a>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <table id="action-items-listing" class="table dataTable no-footer table-striped table-bordered" role="grid"
+          aria-describedby="action-items-listing-info">
+          <thead>
+            <tr role="row">
+              <th>S.no</th>
+              <th>Title</th>
+              <th>Meeting</th>
+              <th>Start Date</th>
+              <th>Target End Date</th>
+              <th>Assigned To</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in action_items %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{item.title}}</td>
+              <td>{{item.meeting}}</td>
+              <td>{{item.start_date|date:"M d Y"}}</td>
+              <td>{{item.target_end_date|date:"M d Y"}}</td>
+              <td>{{item.assignedto|title}}</td>
+              <td>
+                <span class="badge badge-primary {{item.status}}">
+                  {{ item.status | upper | string_replace:"INP,IN P" }}
+                </span>
+              </td>
+              <td>
+                {% if item.status == 'open' or item.status == 'inprogress' %}
+                {% if request.user|in_groups:"Moderator,Admin" %}
+                <a title="Edit Action Item" href="{% url 'update_actionitem' item.id %}">
+                  <i class="fa fa-pencil-square"></i>
+                </a>
+                {%endif%}
+                <a title="Close Action Item" class="delete_meeting" data-href="{% url 'delete_actionitem' item.id %}">
+                  <i class="fa fa-times-circle"></i>
+                </a>
+                <a title="Add Response" href="#" class="add-response" data-id="{{ item.id }}"
+                  data-action-item="{{ item.id  }}" data-toggle="modal" data-target="#responseModal">
+                  <i class="fa fa-reply" aria-hidden="true"></i>
+                </a>
+                {% endif %}
+                <a title="View Responses" class="view_response" href="{% url 'view_responses' item.id %}">
+                  <i class="fa fa-eye" aria-hidden="true"></i>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include 'partials/popups/response-popup.html' %}
+{% include 'partials/popups/view-responses.html' %}
+{% include 'partials/popups/delete.html' %}
+{% endblock content %}

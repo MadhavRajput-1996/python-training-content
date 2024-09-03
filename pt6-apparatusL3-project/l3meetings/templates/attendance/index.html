@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {% block content %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endfor %}
+{% endif %} {% load custom_filters %}
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between">
+            <h4 class="card-title">Agendas</h4>
+            <a href="/meetings/create" class="btn btn-primary">Add Agenda</a>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-12">
+                <table id="agenda-listing" class="table dataTable no-footer table-striped table-bordered" role="grid"
+                    aria-describedby="agenda-listing-info">
+                    <thead>
+                        <tr role="row">
+                            <th>S.no</th>
+                            <th>Title</th>
+                            <th>Created By</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for agenda in agendas %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td><a href="{% url 'meeting_action_items' agenda.id %}">{{agenda.title}}</a></td>
+                            <td>{{meeting.created_by}}</td>
+                           
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'partials/popups/delete.html' %}
+{% endblock content %}

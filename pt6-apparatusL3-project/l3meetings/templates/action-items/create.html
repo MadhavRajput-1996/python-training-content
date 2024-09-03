@@ -1,0 +1,32 @@
+<form method="post" action="" class="add_action_item_form">
+  {% csrf_token %}
+  <div class="row align-items-center">
+    <div class="col-md-4">
+      <div class="form-group">
+        <div class="form-floating">
+          {{ action_item_form.assignedto}}
+          <label class="required" for="id_assignedto">Assigned To</label>
+          {{ action_item_form.assignedto.errors }}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <div class="form-floating">
+          {{ action_item_form.title}}
+          <label class="required" for="id_title"></label>
+          {{ action_item_form.title.errors }}
+
+        </div>
+      </div>
+    </div>
+    <input type="hidden" name="meeting_id" value="{{meeting.id}}" />
+    <input type="hidden" name="agenda_id" value="{{agenda.id}}" />
+    <input type="hidden" name="form_name" value="add_action_item" />
+    <div class="col-md-1">
+      <button type="submit" class="btn btn-primary mb-2">
+        Add
+      </button>
+    </div>
+  </div>
+</form>

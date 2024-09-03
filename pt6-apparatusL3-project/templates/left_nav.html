@@ -1,0 +1,59 @@
+<!-- partial:partials/_sidebar.html -->
+{% load static %}
+{% load custom_filters %}
+{% load active_link_tags %}
+
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="d-flex sidebar-profile">
+        <div class="sidebar-profile-image">
+          {% if user_profile.profile_pic %}
+          <a href="/profile"><img class="img-profile-pic" src="{{ user_profile.profile_pic.url| url_decode }}"
+              alt="Profile Picture" /></a>
+          {% else %}
+          <a href="/profile"><img src="{% static 'images/default-user.png' %} " alt="image" /></a>
+          {% endif %}
+          <span class="sidebar-status-indicator"></span>
+        </div>
+        <div class="sidebar-profile-name">
+          <p class="sidebar-name">
+            {% if user.is_authenticated %} {{ user.first_name|upper }} {{ user.last_name|upper }} {% endif %}
+          </p>
+          <p class="sidebar-designation">Welcome</p>
+        </div>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% active_link 'dashboard' strict=True %}" href="{% url 'dashboard' %}"><i
+          class="fa fa-archive" aria-hidden="true"></i>
+        <span class="menu-title">Dashboard </span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#meetings" aria-expanded="false" aria-controls="meetings">
+        <i class="fa fa-stack-exchange"></i>
+        <span class="menu-title">Deliberation</span>
+        <i class="fa fa-caret-right has_child"></i>
+      </a>
+      <div class="collapse  {% if 'meetings' in current_path %}show{% endif %}" id="meetings">
+        <ul class="nav flex-column sub-menu">
+
+          <li class="nav-item">
+            <a class="nav-link {% active_link 'meetings_list' strict=True %}" href="{% url 'meetings_list' %}">
+              Meetings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% active_link 'action_item_list' strict=True %}"
+              href="{% url 'action_item_list' %}">
+              Actions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% active_link 'current_user_action_item_list' strict=True %}"
+              href="{% url 'current_user_action_item_list' %}">My
+              Action Items</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</nav>

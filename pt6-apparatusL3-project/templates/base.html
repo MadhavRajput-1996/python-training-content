@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {% if page_title %}
+  <title>{{site_name}} | {{page_title}}</title>
+  {% else %}
+  <title>{{site_name}}</title>
+  {% endif %}
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'css/vendor.bundle.base.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/dataTables.bootstrap4.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/jquery.toast.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/app.css' %}" />
+  <link rel="shortcut icon" href="{% static 'images/favicon-32x32.png' %}" />
+  <link rel="stylesheet" href="{% static 'css/flatpickr.min.css' %}">
+</head>
+
+<body>
+  <div class="container-scroller d-flex flex-column">
+    {% if user.is_authenticated %} {% include "top_nav.html" %}
+    <div class="container-fluid page-body-wrapper">
+      {% include "left_nav.html" %}
+      <div class="main-panel">
+        <div class="content-wrapper">
+          {% block content %}{% endblock content %}
+        </div>
+        {% include "footer.html" %}
+      </div>
+    </div>
+    {% else %}
+    <div class="container-fluid page-body-wrapper full-page-wrapper d-flex flex-column">
+      <div class="content-wrapper flex-grow-1 d-flex align-items-center auth px-0">
+        <div class="row w-100 mx-0">
+          <div class="col-lg-5 mx-auto">
+            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+              {% block auth_content %}{% endblock auth_content %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% include "footer.html" %}
+    </div>
+    {% endif %}
+  </div>
+
+  
+  <!-- base:js -->
+  <script src="{% static 'js/vendor.bundle.base.js' %}"></script>
+  <script src="{% static 'js/hoverable-collapse.js' %}"></script>
+  <script src="{% static 'js/jquery.dataTables.js' %}"></script>
+  <script src="{% static 'js/dataTables.bootstrap4.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+  <script src="{% static 'js/jquery.toast.min.js' %}"></script>
+  <script src="{% static 'js/template.js' %}"></script>
+  <script src="{% static 'js/flatpickr.js' %}"></script>
+
+  <!-- To show last Agenda Item card. --> 
+  <script type="text/javascript">
+     document.addEventListener("DOMContentLoaded", function() {
+      var popoverElements = document.querySelectorAll('[data-toggle="popover"]');
+      popoverElements.forEach(function(element) {
+          new bootstrap.Popover(element);
+      });
+  });
+
+   let allDT = document.querySelectorAll("[data-action]");
+   if(allDT.length){
+      let maxAction = 0;
+      allDT.forEach((value) => {
+        let getAllValue = value.getAttribute('data-action');
+        let splitValue = getAllValue.split('_')
+        if(splitValue[1] > maxAction){
+            maxAction = splitValue[1]
+        }
+      })
+      // if found max action item then.
+      if(maxAction >0){
+        let getMaxAction = document.querySelector('[data-action=action_'+maxAction+']')
+        getMaxAction.parentNode.parentNode.parentNode.classList.add("show")
+      }
+    }
+    </script>
+</body>
+
+</html>

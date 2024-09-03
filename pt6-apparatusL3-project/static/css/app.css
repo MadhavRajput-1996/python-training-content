@@ -1,0 +1,507 @@
+/* Target the autocomplete styles */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px white inset !important; /* Adjust the background color */
+  -webkit-text-fill-color: #333; /* Adjust the text color */
+}
+
+/* Additional styles to ensure consistency */
+input:-internal-autofill-selected {
+  background-color: white !important; /* Adjust the background color */
+}
+
+.content-wrapper .alert button {
+  margin: -3px 0px 0px 15px;
+  padding: 0;
+  position: static;
+  float: right;
+}
+
+.content-wrapper .alert {
+  position: fixed;
+  z-index: 9999;
+  right: 30px;
+  padding: 20px;
+  top: 1px;
+}
+
+.form-control {
+  border: 1px solid #b6b6b6 !important;
+  padding: 16px 20px !important;
+}
+
+.dataTables_wrapper .form-control {
+  padding: 0.5rem 0.81rem !important;
+}
+
+.datepicker td,
+.datepicker th {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #a71d2a;
+  border-color: #a71d2a;
+}
+
+.badge.badge-primary.open {
+  background-color: #007bff;
+}
+
+.badge.badge-primary.close {
+  background-color: #6c757d;
+  color: #fff;
+  text-shadow: 0 0;
+}
+
+.badge.badge-primary.inprogress {
+  color: #fff;
+  background-color: #28a745;
+}
+
+i {
+  font-size: 16px !important;
+  color: #8a8787 !important;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+.dataTable i {
+  cursor: pointer;
+}
+
+.fa.fa-trash {
+  color: #a71d2a !important;
+}
+
+.auth .brand-logo {
+  height: auto;
+  padding-bottom: 30px;
+}
+
+.blank_container {
+  min-height: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ccc;
+}
+
+.blank_container img {
+  margin-bottom: 20px;
+}
+
+.blank_container h1 {
+  font-size: 100px;
+  font-weight: bold;
+}
+
+.blank_container h2 {
+  font-size: 50px;
+  margin: 20px 0;
+  font-weight: bold;
+}
+
+.blank_container a {
+  color: #a71d2a;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.auth-form-light .alert {
+  position: static;
+}
+
+.alert-error {
+  color: #850000;
+  background-color: #ffcccc;
+  border-color: #ffb8b8;
+}
+
+.card .card-title {
+  margin-bottom: 0;
+}
+
+.form-floating {
+  position: relative;
+}
+
+.form-floating > label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  transform-origin: 0 0;
+  transition: all 0.2s ease-in-out;
+  opacity: 0.5;
+  background: #fff;
+  margin: 16px 10px;
+  padding: 0 10px;
+}
+
+.form-floating > .form-control:focus ~ label,
+.form-floating.image_wrapper > .form-control ~ label,
+.form-floating > .form-control.has-value ~ label {
+  transform: scale(0.85) translateY(-1.7rem) translateX(0.15rem);
+  opacity: 1;
+  background: #fff;
+  margin: 15px 10px;
+}
+
+.datepicker_wrapper .input-group-append {
+  color: #7e7e7e;
+  width: auto;
+  border: none;
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  cursor: pointer;
+}
+
+.datepicker_wrapper .input-group-append .input-group-text {
+  padding: 16px;
+  color: #333333;
+}
+.flatpickr-input{
+  background-color: #fff !important;
+}
+.nav-item i {
+  margin-right: 8px;
+  font-size: 18px !important;
+}
+
+.nav-link.active {
+  color: #fff !important;
+}
+
+.history_btn i {
+  color: #fff !important;
+  font-size: 16px !important;
+  margin-right: 5px;
+}
+
+.logout-btn {
+  background: transparent;
+  padding: 0;
+  border: 0;
+}
+
+ul.errorlist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: #850000;
+  font-size: 12px;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #850000;
+  border-color: #850000;
+}
+
+.text-primary,
+.list-wrapper .completed .remove,
+.footer a {
+  color: #a71d2a !important;
+}
+
+label.required::after {
+  content: " *";
+  color: #a71d2a;
+  font-size: 18px;
+}
+
+.meeting_list_wrapper .form-group {
+  margin: 0 10px 0 0;
+  padding: 0px;
+}
+
+.meeting_list_wrapper .form-group .form-control {
+  padding: 10px !important;
+}
+
+.nav-item .has_child {
+  margin-left: auto;
+  transition: 0.3s ease;
+}
+
+.nav-item .has_child.rotate,
+.nav-link[aria-expanded="true"] .has_child {
+  transform: rotate(90deg);
+}
+
+.nav-link.collapsed .has_child.rotate {
+  transform: rotate(0deg);
+}
+
+#accordion .card-header {
+  cursor: pointer;
+}
+
+#accordion .card-header button {
+  color: #000;
+}
+
+#accordion .card-header.collapsed .accicon {
+  transform: rotate(180deg);
+}
+
+#accordion .card-header:not(.collapsed) .accicon {
+  transform: rotate(0deg);
+}
+
+#accordion .card {
+  margin: 0 0 20px 0;
+}
+
+#accordion .created_by {
+  color: #909090;
+}
+
+#accordion .accicon {
+  float: right;
+  margin-left: 10px;
+}
+
+#accordion .accicon i {
+  color: #000 !important;
+}
+
+.agenda_wrapper {
+  margin: 30px 0;
+}
+
+.agenda_wrapper h3 {
+  margin-bottom: 0px;
+}
+
+/* Add response popup */
+/* Remove default arrow */
+form#responseForm select {
+  -webkit-appearance: none !important; /* Webkit browsers (e.g., Chrome, Safari) */
+  -moz-appearance: none !important; /* Mozilla Firefox */
+  appearance: none !important; /* W3C standard */
+  padding-right: 1em; /* Add padding to ensure text is not covered */
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: center;
+}
+/* response model poup */
+
+.responses-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.response-mbody {
+  max-height: 400px; /* Adjust as needed */
+  overflow-y: auto;
+}
+
+.response-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.response-icon {
+  flex: 0 0 30px;
+  text-align: center;
+  color: #666;
+}
+
+.response-content {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.response-meta {
+  flex: 0 0 150px;
+  text-align: right;
+}
+
+.response-text {
+  margin: 0;
+  font-weight: bold;
+}
+
+.response-date {
+  margin: 10px 0;
+  font-size: 0.85em;
+  color: #666;
+}
+
+.responded-by {
+  margin: 0;
+  font-size: 0.85em;
+  color: #333;
+}
+
+.response-category {
+  margin: 0;
+  font-size: 0.75em;
+  color: #999;
+}
+
+.response-separator {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 10px 0;
+}
+
+.view-response-model {
+  max-width: 750px;
+}
+.view-model-header-response {
+  background: #001737;
+  color: #fff;
+}
+
+.cls-view-response {
+  color: #fff !important;
+}
+
+.add_agenda_form,
+.edit_agenda_form,
+.add_action_item_form {
+  display: none;
+}
+
+.add_agenda_btn i,
+.add_action_item i {
+  color: #fff !important;
+}
+
+.add_agenda_form .btn {
+  margin-top: 2px;
+}
+
+.add_agenda_form .status.has-value {
+  text-transform: capitalize;
+  background: #fff;
+}
+
+.edit_agenda_btn {
+  display: none;
+}
+
+.card-header:hover .edit_agenda_btn {
+  display: inline-block;
+}
+
+.card-header .edit_agenda_btn {
+  border: 1px solid #a71d2a;
+  padding: 5px;
+  background: #a71d2a;
+  border-radius: 3px;
+}
+
+.card-header .edit_agenda_btn i {
+  color: #fff !important;
+}
+
+.edit_ugenda_btn_ {
+  background: #a71d2a;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.edit_ugenda_btn_ i {
+  color: #fff !important;
+}
+
+.edit_agenda_form {
+  width: 70%;
+}
+
+.edit_agenda_form .form-group,
+.add_action_item_form .form-group {
+  margin: 0 !important;
+}
+
+.add_action_item_form {
+  padding: 20px 0;
+}
+
+span.action_item_list::before {
+  content: "\f111";
+  font: normal normal normal 7px/2 FontAwesome;
+  margin: 0 2px 0px 0;
+}
+/*  login signup template css */
+
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px; /* Adjust margin as needed */
+}
+.google-login {
+  margin-bottom: 20px;
+}
+.divider-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  width: 100%;
+}
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background-color: #ccc;
+}
+.divider-text {
+  margin: 0 10px;
+  font-weight: bold;
+  color: #666;
+}
+.down-arrow {
+  cursor: pointer;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.custom-login-form {
+  max-width: 400px;
+  overflow: hidden;
+  height: 0;
+  transition: height 0.5s ease-in-out;
+}
+.hidden-form-content {
+  display: none;
+}
+.custom-login-form.open .hidden-form-content {
+  display: block;
+}
+
+.hide {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+
+
+.flatpickr-calendar {
+  z-index: 9999;  /* Ensure the calendar is above other elements */
+}
+
+/* shifting plus icon right side */
+.agenda_plus_button{
+  text-align: right;
+}
+.plus-icon{
+  display: inline-block;
+}
+.action-assigned-to{
+  color:#001737;
+}
+.action-assigned-to:hover{
+  color:#001737;
+}

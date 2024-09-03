@@ -1,0 +1,42 @@
+<!-- response-popup.html -->
+
+<div class="modal fade" id="responseModal" tabindex="-1" role="dialog" aria-labelledby="responseModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="responseModalLabel">Add Response</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="responseForm" class="meeting_form" method="post" action="">
+            {% csrf_token %}
+            
+            <div class="form-group">
+
+              <div class="form-floating">
+                {{ response_form.action_item}}
+                <label for="id_response_date">{{ response_form.action_item.label }}{% if response_form.action_item.field.required %}<span class="text-danger">*</span>{% endif %}</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-floating datepicker_wrapper">
+              {{ response_form.response_date }}
+              <label for="id_response_date">{{ response_form.response_date.label }}{% if response_form.response_date.field.required %}<span class="text-danger">*</span>{% endif %}</label>
+              {{ response_form.response_date.errors }}
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-floating">
+              {{ response_form.response_text }}
+              <label for="id_response_text">{{ response_form.response_text.label }}{% if response_form.response_text.field.required %}<span class="text-danger">*</span>{% endif %}</label>
+              {{ response_form.response_text.errors }}
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div> 
+  </div>

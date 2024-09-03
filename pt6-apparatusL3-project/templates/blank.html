@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% if page_title %}
+    <title>Apparatus L3 | {{page_title}}</title>
+    {% else %}
+    <title>Apparatus L3</title>
+    {% endif %}
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/vendor.bundle.base.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/typicons.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/dataTables.bootstrap4.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/jquery.toast.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/app.css' %}" />
+</head>
+
+<body>
+    <div class="blank_container"> {% block content %}{% endblock content %}</div>
+</body>
+
+</html>

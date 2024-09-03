@@ -1,0 +1,26 @@
+<form method="post" class="add_agenda_form mb-3">
+    {% csrf_token %}
+    <div class="row w-100">
+        <div class="col-md-5">
+            <div class="form-group">
+                <div class="form-floating">
+                    <input type="text" required class="form-control" name="agenda_title" />
+                    <label class="required" for="agenda_title">Agenda Title</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <div class="form-floating">
+                    <input type="text" readonly required class="has-value status form-control" value="open"
+                        name="status" />
+                    <label class="required" for="agenda_title">Agenda Status</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"> <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </div>
+    <input type="hidden" name="meeting_id" value="{{meeting.id}}" />
+    <input type="hidden" name="form_name" value="add_agenda" />
+</form>

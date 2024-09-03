@@ -1,0 +1,33 @@
+<form method="post" class="edit_agenda_form mb-3">
+    {% csrf_token %}
+    <div class="row w-100">
+        <div class="col-md-5">
+            <div class="form-group">
+                <div class="form-floating">
+                    <input type="text" required class="form-control" name="agenda_title" value="{{agenda.title}}" />
+                    <label class="required" for="agenda_title">Agenda Title</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <div class="form-floating">
+                    <select name="status" class="has-value status form-control">
+                        <option {% if agenda.status == 'open' %} selected {% endif %} value="open">Open</option>
+                        <option {% if agenda.status == 'close' %} selected {% endif %} value="close">Close</option>
+                    </select>
+                    <label class="required" for="agenda_title">Agenda Status</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 d-flex align-items-center">
+            <a href="#" data-agenda_id ="{{agenda.id}}" class="update_agenda edit_ugenda_btn_"><i class="fa fa-check" aria-hidden="true"></i>
+            </a>
+            <a href="#" class="close_agenda edit_ugenda_btn_ ml-2"><i class="fa fa-times-circle" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+    <input type="hidden" name="meeting_id" value="{{meeting.id}}" />
+    <input type="hidden" name="agenda_id" value="{{agenda.id}}" />
+    <input type="hidden" name="form_name" value="add" />
+</form>

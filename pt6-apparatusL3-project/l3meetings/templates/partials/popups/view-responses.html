@@ -1,0 +1,36 @@
+<div class="modal fade" id="responsesModal" tabindex="-1" role="dialog" aria-labelledby="responsesModalLabel" aria-hidden="true">
+    <div class="modal-dialog view-response-model" role="document">
+        <div class="modal-content">
+            <div class="modal-header view-model-header-response">
+                <h5 class="modal-title" id="responsesModalLabel">{{ action_item }} - Updates</h5>
+                <button type="button" class="close cls-view-response" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body response-mbody">
+                <div class="responses-container">
+                    {% for response in responses %}
+                    <div class="response-item">
+                        <div class="response-icon">
+                            <i class="fa fa-share" aria-hidden="true"></i>
+                        </div>
+                        <div class="response-content">
+                            <p class="response-text">{{ response.response_text }}</p>
+                            <p class="response-date">{{ response.response_date }} | {{ response.responded_by|title }}</p>
+                        
+                        </div>
+                    </div>
+                    <hr class="response-separator">
+                    {% endfor %}
+                    {% if not responses %}
+                    <p>No responses found.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+
+</style>

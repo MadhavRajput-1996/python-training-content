@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% block page_title %}
+<title>User Profile</title>
+{% endblock page_title %}
+
+{% block content %}
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">User Profile</h4>
+            <div class="profile-row">
+
+                {% if user.is_authenticated %}
+                <div class="col-md-6">
+                    
+                        <center class="pt-65">
+                        {% if user_profile.profile_pic %}
+                        <img class="profile_image_style" src="{{ user_profile.profile_pic.url|url_decode }}" alt="Profile Picture">
+                        {% else %}
+                        <p>No profile picture available.</p>
+                        {% endif %}
+                        </center>
+                    
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input class="form-control" type="text" value="{{user.username}}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input class="form-control" type="text" value="{{user.email}}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Group</label>
+                        <input class="form-control" type="text" value="{{ user_profile.group }}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Employee ID</label>
+                        <input class="form-control" type="text" value="{{ user_profile.employee_id }}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input class="form-control" type="text" value="{{ user_profile.phone }}" disabled>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static %}
+ {% load custom_filters %} {% block content %}
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endfor %}
+{% endif %}
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between">
+                <h2 class="card-title">{{meeting.title}}</h2>
+
+                <a href="/meetings" class="btn btn-primary history_btn">
+                    <i class="fa fa-chevron-circle-left"></i>
+                    Go Back
+                </a>
+            </div>
+            <h5><b>Schedule Date:</b> {{meeting.meeting_date}}</h5>
+            <h5><b>Delivery Unit:</b> {{meeting.delivery_unit}}</h5>
+            <hr />
+
+            <div class="agenda_wrapper">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h3>Meeting Agendas</h3>
+                </div>
+
+                {% if agendas %}
+                <div id="accordion">
+                    {% for agenda in agendas %}
+                    <div class="card">
+                        <div class="card-header collapsed d-flex align-items-center justify-content-between"
+                            data-toggle="collapse"
+                            data-target="#{{agenda.title|lower|string_replace:' ,_'}}_{{forloop.counter}}"
+                            aria-expanded="true">
+                            {% include 'agendas/edit.html' %}
+
+                            <span class="title agenda_title">{{agenda.title}}
+                                {% if agenda.is_default %}
+                                <i title="Default Agenda item" aria-hidden="true">(Default)</i>
+                                {% endif %}
+                                {% if request.user == agenda.created_by%}
+                                <a href="#" class="edit_agenda_btn">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                {% endif %}
+                            </span>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <span class="created_by">{{agenda.created_by_first_name}}</span>
+                                <span class="accicon"><i class="fa fa-angle-down"></i></span>
+                            </div>
+
+                        </div>
+                        <div id="{{agenda.title|lower|string_replace:' ,_'}}_{{forloop.counter}}" class="collapse"
+                            aria-labelledby="{{agenda.title|lower|string_replace:' ,_'}}" data-parent="#accordion">
+                            <div class="card-body">
+                                <span class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
+                                    <h3>Action Items</h3>
+                                    {% if request.user == agenda.created_by or agenda.is_default == True%}
+                                    <a href="#" data-meeting_id={{meeting.id}} data-agenda_id={{agenda.id}}
+                                        class="add_action_item btn btn-primary">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                    {% endif %}
+                                </span>
+                                {% if request.user == agenda.created_by%}
+                                {% include 'action-items/create.html' %}
+                                {% endif %}
+
+                                <span class="mt-2 float-left mb-3">
+                                    {% if action_items %}
+                                        {% for item in action_items %}
+                                            {% if item.agenda_id == agenda.id %} 
+                                            <div data-action="action_{{item.id}}" class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
+                                                <h6 class="w-50 m-0 text-truncate">{{item.title}}</h6>
+                                                <span class="w-50 text-right span-font-actionitem">Assigned to:  {% if item.count > 1 %}All{% else %}{{ item.assignedto.first_name }} {{ item.assignedto.last_name }}{% endif %} </span>
+                                            </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="agenda_plus_button">
+                        <div class="plus-icon">
+                            <a href="#"
+                            class="btn btn-primary add_agenda_btn">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                        </div>
+                    </div>
+                    <hr>
+                    {% include 'agendas/create.html' %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between">
+                <h2 class="card-title">{{meeting.title}} Notes</h2>
+            </div>
+            <hr />
+            <hr>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="form-floating">
+                                <input type="hidden" name="form_name" value="add_meeting_note">
+                                {{ meeting_notes_form.note_description }}
+                                {{ meeting_notes_form.note_description.errors }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <button type="submit" class="btn btn-primary mb-2">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="form_name" value="add_meeting_attendance">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h2 class="card-title">Mark Attendance For {{ meeting.title }}</h2>
+                </div><hr/>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="absent_users"><b>Users Invited To The Meeting</b></label>
+                            {{ meeting_attendance_form.absent_users }}
+                            {{ meeting_attendance_form.absent_users.errors }}
+                        </div>
+                    </div>
+                    <div class="col-md-2 text-center d-flex align-items-center justify-content-center">
+                        <div class="d-flex flex-column">
+                            <button type="button" id="mark_present" class="btn btn-primary mb-2">&gt;</button><br>
+                            <button type="button" id="mark_absent" class="btn btn-secondary mb-2">&lt;</button><br>
+                            <button type="button" id="mark_all_present" class="btn btn-primary mb-2">&gt;&gt;</button><br>
+                            <button type="button" id="mark_all_absent" class="btn btn-secondary mb-2">&lt;&lt;</button>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="present_users"><b>Users Present In The Meeting</b></label>
+                            {{ meeting_attendance_form.present_users }}
+                            {{ meeting_attendance_form.present_users.errors }}
+                        </div>
+                    </div>
+                    <input type="hidden" id="hidden_unselected_users" name="absent_users" value="">
+                    <input type="hidden" id="hidden_selected_users" name="present_users" value="">
+                    <div class="col-md-12 text-right">
+                        <button type="submit" class="btn btn-primary mb-2">Update</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
