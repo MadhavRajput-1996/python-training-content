@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/leftbar.css' %}">
+{% endblock %}
+{% block content %}
+<div class="dashboard-container">
+    <!-- Left Navigation -->
+    <aside class="left-nav">
+        <!-- Profile Section -->
+        <div class="profile-section text-center">
+            <img src="{{ user.profile_pic.url }}" alt="Profile Image" class="img-thumbnail">
+            <h4>{{ user.username }}<span class="edit-profile-icon" onclick="showProfileForm()">✏️</span></h4>
+        </div>
+
+        <!-- Music Categories Section -->
+        <div class="nav-section">
+            <h5>
+                <a href="javascript:void(0)" class="nav-link" onclick="toggleSection('music-categories-content')">
+                    🎵 Music Categories
+                </a>
+            </h5>
+            <div id="music-categories-content" style="display:none;">
+                <ul id="category-list" class="list-group">
+                    {% if categories %}
+                    {% for category in categories %}
+                    <li class="list-group-item">
+                        <a href="{% url 'category_detail' category.id %}">{{ category.name }}</a>
+                    </li>
+                    {% endfor %}
+                    {% else %}
+                    <li class="list-group-item">No categories available</li>
+                    {% endif %}
+                </ul>
+                <button class="btn btn-outline-primary btn-sm mb-2" onclick="showCategoryForm()">Add Category</button>
+                <button class="btn btn-outline-primary btn-sm mb-2" onclick="loadAddSongForm()">Upload Songs</button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Dynamic Content Section (for forms) -->
+        <div id="dynamic-content-section">
+            <!-- Placeholder for dynamically loaded content -->
+            <div id="dynamic-content-placeholder"></div>
+
+            <!-- Profile Update Form (Initially Hidden) -->
+            <div id="profile-update-section" style="display: none;">
+                <h1>Update Your Profile</h1>
+                <!-- Profile Update Form -->
+                <form method="POST" action="{% url 'update_profile' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ user_update_form.as_p }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                </form>
+            </div>
+
+            <!-- Add Category Form (Initially Hidden) -->
+            <div id="add-category-form-section" style="display:none;">
+                <h1>Add New Category</h1>
+                <form method="POST" action="{% url 'add_category' %}">
+                    {% csrf_token %}
+                    {{ music_category_form.as_p }}
+                    <button type="submit" class="btn btn-primary">Add Category</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function toggleSection(sectionId) {
+        var section = document.getElementById(sectionId);
+        section.style.display = section.style.display === "none" ? "block" : "none";
+    }
+
+    function showProfileForm() {
+        hideAllForms();
+        document.getElementById('profile-update-section').style.display = "block";
+    }
+
+    function showCategoryForm() {
+        hideAllForms();
+        document.getElementById('add-category-form-section').style.display = "block";
+    }
+
+    function loadAddSongForm() {
+        hideAllForms(); // Ensure other forms are hidden
+        document.getElementById('dynamic-content-placeholder').innerHTML = '<p>Loading...</p>';
+
+        fetch("{% url 'add_song_to_category' %}", {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('dynamic-content-placeholder').innerHTML = html;
+            })
+            .catch(error => {
+                console.error('Error loading add song form:', error);
+                document.getElementById('dynamic-content-placeholder').innerHTML = '<p>Error loading form. Please try again.</p>';
+            });
+    }
+
+    function hideAllForms() {
+        document.getElementById('profile-update-section').style.display = "none";
+        document.getElementById('add-category-form-section').style.display = "none";
+        document.getElementById('dynamic-content-placeholder').innerHTML = ''; // Clear dynamic content
+    }
+
+</script>
+{% endblock %}

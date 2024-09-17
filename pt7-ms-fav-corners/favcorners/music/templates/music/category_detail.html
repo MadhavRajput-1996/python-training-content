@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <!-- Back to Dashboard Button at the Top Right Corner -->
+    <div class="d-flex justify-content-end mb-4">
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+
+    <!-- Category Title -->
+    <div class="d-flex align-items-center mb-3">
+        <!-- Category Name -->
+        <h2 class="display-4 mb-0 me-3" style="color: #007bff;">
+            {{ category.name }}
+        </h2>
+        <!-- Edit Icon Button -->
+        <button class="btn btn-outline-primary btn-lg" data-bs-toggle="modal" data-bs-target="#editCategoryModal">
+            <i class="fas fa-pencil-alt"></i>
+        </button>
+    </div>
+
+    <!-- Subtitle for Songs in Category -->
+    <h3 class="text-center mb-4 text-secondary" style="font-size: 1.75rem; letter-spacing: 1px;">
+        Explore Songs in this Category
+    </h3>
+
+    <!-- Song List -->
+    {% if songs %}
+    <div class="row">
+        {% for song in songs %}
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 shadow-sm border-0 position-relative">
+                <div class="position-absolute top-0 end-0 p-2">
+                    <!-- Delete Icon Button -->
+                    <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#deleteSongModal{{ song.id }}">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ song.title }}</h5>
+                    <p class="card-text">by {{ song.artist }}</p>
+                    {% if song.url %}
+                    <a href="{{ song.url }}" target="_blank" class="btn btn-primary btn-sm mb-2">Listen</a>
+                    {% endif %}
+                    {% if song.audio_file %}
+                    <audio controls class="w-100">
+                        <source src="{{ song.audio_file.url }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-warning text-center">No songs available in this category.</div>
+    {% endif %}
+</div>
+
+<!-- Edit Category Modal -->
+<div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editCategoryModalLabel">Edit Category Name</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{% url 'edit_category' category.id %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="new_name" class="form-label">New Category Name</label>
+                        <input type="text" name="new_name" id="new_name" value="{{ category.name }}"
+                            class="form-control form-control-sm" placeholder="Enter new name" required>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-success btn-sm me-2">Save</button>
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Song Modals -->
+{% for song in songs %}
+<div class="modal fade" id="deleteSongModal{{ song.id }}" tabindex="-1"
+    aria-labelledby="deleteSongModalLabel{{ song.id }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteSongModalLabel{{ song.id }}">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete the song "{{ song.title }}" by {{ song.artist }}?</p>
+            </div>
+            <div class="modal-footer">
+                <form method="post" action="{% url 'delete_song' song.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

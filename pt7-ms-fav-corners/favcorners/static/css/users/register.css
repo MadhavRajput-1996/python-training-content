@@ -1,0 +1,16 @@
+.card-body {
+    padding: 2rem;
+}
+
+form .form-label {
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #5e575a !important; 
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #c42d60 !important;
+}

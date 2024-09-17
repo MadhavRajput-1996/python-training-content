@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="text-center mb-5">
+            <h1 class="display-4 font-weight-bold">🎶 Explore Music</h1>
+            <p class="lead text-muted">Discover your favorite songs from a variety of artists.</p>
+        </div>
+
+        {% if results %}
+            <div class="row">
+                {% for result in results %}
+                <div class="col-md-4 mb-4 d-flex align-items-stretch">
+                    <div class="card bg-light shadow-lg border-0 rounded-lg h-100">
+                        <div class="card-body text-center">
+                            <div class="icon-container mb-4">
+                                🎵 <!-- Add a musical note emoji for style -->
+                            </div>
+                            <h5 class="card-title font-weight-bold text-primary">{{ result.title }}</h5>
+                            <p class="text-muted mb-2">by <span class="font-italic">{{ result.artist }}</span></p>
+                        </div>
+                        <div class="card-footer text-center bg-transparent border-0 pb-4">
+                            <a href="{{ result.lastfm_url }}" class="btn btn-outline-primary px-5" target="_blank">
+                                🎧 Listen on Last.fm
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-warning text-center shadow-sm mt-5" role="alert">
+                <h4 class="alert-heading">No Songs Found</h4>
+                <p>We couldn’t find any songs based on your search. Please try again with different keywords.</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,62 @@
+.dashboard-container {
+    display: flex;
+}
+
+/* Left Navigation Styling */
+.left-nav {
+    width: 250px;
+    background-color: #f8f9fa;
+    padding: 15px;
+    height: 100vh;
+    position: fixed;
+    top: 56px; /* Adjust to prevent overlap with the navbar */
+    left: 0;
+    overflow-y: auto;
+}
+
+.left-nav img {
+    border-radius: 50%;
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+.left-nav h4 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.left-nav .nav-section {
+    margin-bottom: 30px;
+}
+
+.left-nav .nav-section h5 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.left-nav .nav-section .list-group-item {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 5px 10px;
+}
+
+.left-nav .nav-section .btn-sm {
+    margin-bottom: 10px;
+}
+
+.left-nav .nav-section a {
+    text-decoration: none;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.left-nav .nav-section ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+/* Main content styling */
+.main-content {
+    margin-left: 270px; /* Leaves space for the left-nav */
+    padding: 20px;
+}

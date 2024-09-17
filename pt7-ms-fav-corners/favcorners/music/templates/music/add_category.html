@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Category - ms-fav-corners</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <!-- Include the navigation bar -->
+        {% include 'base.html' %}
+    </header>
+    <main>
+        <h1>Add a New Music Category</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Add Category</button>
+        </form>
+    </main>
+</body>
+</html>
