@@ -1,0 +1,3 @@
+First line written using writelines.
+Second line written using writelines.
+Third line written using writelines.
